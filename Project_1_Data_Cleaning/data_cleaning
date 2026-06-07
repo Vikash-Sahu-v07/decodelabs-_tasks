@@ -60,3 +60,5 @@ cleaned_df.to_excel(output_path, index=False)
 print(f"Success! Cleaned file saved locally to: {os.path.abspath(output_path)}")
 print(f"Remaining nulls in CouponCode: {cleaned_df['CouponCode'].isnull().sum()}")
 print(f"Total remaining nulls in dataset: {cleaned_df.isnull().sum().sum()}")
+
+# dfd
