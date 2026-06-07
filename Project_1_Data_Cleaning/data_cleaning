@@ -1,0 +1,62 @@
+import os
+import pandas as pd
+
+# 1. FILEPATH CONFIGURATION & LOADING
+filepath = r"D:\Local Disk\Programming\VikashDA\Dataset for Data Analytics.xlsx"
+
+print("--- STEP 1: LOADING DATASET ---")
+xls = pd.ExcelFile(filepath)
+print("Sheet names found:", xls.sheet_names)a
+
+df = pd.read_excel(filepath, sheet_name='Sheet1')
+print(f"Dataset Shape: {df.shape[0]} rows, {df.shape[1]} columns")
+
+# 2. RUN DIAGNOSTIC AUDIT
+print("\n--- STEP 2: RUNNING INTEGRITY AUDIT ---")
+print(df.describe(include='all'))
+
+# Check for duplicate unique identifiers
+duplicate_ids = df['OrderID'].duplicated().sum()
+print(f"\nDuplicate OrderID count: {duplicate_ids} (Target: 0)")
+
+# Check for missing values before cleaning
+print("\nMissing values per column before cleaning:")
+print(df.isnull().sum())
+
+# Mathematical verification check
+diff = (df['Quantity'] * df['UnitPrice'] - df['TotalPrice']).abs()
+print(f"\nMax math discrepancy found: {diff.max()}")
+print(f"Rows deviating by more than $0.01: {(diff > 0.01).sum()}")
+
+# 3. SYSTEMATIC CLEANING PIPELINE
+print("\n--- STEP 3: EXECUTING REPRODUCIBLE CLEANING ---")
+cleaned_df = df.copy()
+
+# A. Strategic Imputation: Fix missing coupon codes using modern direct assignment
+cleaned_df['CouponCode'] = cleaned_df['CouponCode'].fillna('NO_COUPON')
+
+# B. Temporal Normalization: Format dates to ISO 8601 standard (YYYY-MM-DD)
+cleaned_df['Date'] = pd.to_datetime(cleaned_df['Date']).dt.strftime('%Y-%m-%d')
+
+# C. Whitespace Stripping: Clean text columns
+string_cols = ['OrderID', 'CustomerID', 'Product', 'ShippingAddress', 'PaymentMethod', 'OrderStatus', 'TrackingNumber', 'CouponCode', 'ReferralSource']
+for col in string_cols:
+    cleaned_df[col] = cleaned_df[col].astype(str).str.strip()
+
+# D. Lexical Case Normalization: Apply Proper/Title Case
+proper_case_cols = ['Product', 'PaymentMethod', 'OrderStatus', 'ReferralSource']
+for col in proper_case_cols:
+    cleaned_df[col] = cleaned_df[col].str.title()
+
+# E. High Precision Scale Constraints: Enforce 2-decimal precision
+cleaned_df['UnitPrice'] = cleaned_df['UnitPrice'].round(2)
+cleaned_df['TotalPrice'] = cleaned_df['TotalPrice'].round(2)
+
+# 4. EXPORT ARCHIVE PLATFORM
+print("\n--- STEP 4: EXPORTING GOLD-STANDARD DATASET ---")
+output_path = 'Cleaned_Dataset_Data_Analytics.xlsx'
+cleaned_df.to_excel(output_path, index=False)
+
+print(f"Success! Cleaned file saved locally to: {os.path.abspath(output_path)}")
+print(f"Remaining nulls in CouponCode: {cleaned_df['CouponCode'].isnull().sum()}")
+print(f"Total remaining nulls in dataset: {cleaned_df.isnull().sum().sum()}")
