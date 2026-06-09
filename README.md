@@ -1,5 +1,5 @@
 # 📊 DecodeLabs Business Intelligence & Analytics Portfolio
-**Intern:** [Your Full Name Here]  
+**Intern:** Vikash Sahu
 **Domain:** Data Analytics  
 **Batch:** 2026  
 **Status:** All Core Tasks Completed & Quality Audited  
@@ -64,4 +64,4 @@ Structured business intelligence scripts designed to prevent "Alias Traps" durin
 
 ---
 
-**Analyst Sign-off Certification:** *“I certify that this multi-phase analytics portfolio represents a verified, accurate exploration of our business infrastructure data. The pipeline scripts, relational queries, and dashboard architectures are optimized, fully reproducible, and ready for deployment.”* **Signature:** `___________________________` (Data Analytics Intern, Batch 2026)
+**Analyst Sign-off Certification:** *“I certify that this multi-phase analytics portfolio represents a verified, accurate exploration of our business infrastructure data. The pipeline scripts, relational queries, and dashboard architectures are optimized, fully reproducible, and ready for deployment.”* **Signature:** `Vikash Sahu` (Data Analytics Intern, Batch 2026)
