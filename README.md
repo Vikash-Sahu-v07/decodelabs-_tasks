@@ -1,6 +1,5 @@
 # 📊 DecodeLabs Business Intelligence & Analytics Portfolio
 **Intern:** Vikash Sahu
-
 **Domain:** Data Analytics  
 **Batch:** 2026  
 **Status:** All Core Tasks Completed & Quality Audited  
